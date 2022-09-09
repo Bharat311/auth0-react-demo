@@ -23,6 +23,11 @@ export const RouterProvider = () => {
 };
 
 const AuthLayout = () => {
-  const { isAuthenticated } = useAuth0;
-  return isAuthenticated ? <Outlet/> : <Navigate to={"/"} replace/>
+  const { isLoading, isAuthenticated } = useAuth0;
+
+  if (isLoading || isAuthenticated) {
+    return (<Outlet />);
+  }
+
+  return (<Navigate to={"/"} replace/>)
 };
