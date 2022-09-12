@@ -4,38 +4,17 @@ import { useNavigate } from "react-router-dom";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
-  const [tokens, setTokens] = useState([]);
   const { loginWithPopup, loginWithRedirect, getAccessTokenSilently } = useAuth0();
 
-  // useEffect(() => {
-  //   console.log('okay 1')
-  //   const getToken = async () => {
-  //     console.log('okay 2')
-  //     await getAccessTokenSilently(function(data) {
-  //       console.log('okay 3')
-  //       console.log(data)
-  //     })
-  //   }
-  //   getToken();
-  // }, []);
-
-  useEffect(() => {
-    const getTokens = async () => {
-      console.log('--- 1 ---')
-      const tokens = await getAccessTokenSilently(function(token){
-        console.log('--- 2 ---')
-      });
-      console.log('--- 3 ---')
-      console.log(tokens)
-      setTokens(tokens);
-    };
-
-    getTokens(); // run it, run it
-
-    return () => {
-      // this now gets called when the component unmounts
-    };
-  }, []);
+  const silentAuthentication = async () => {
+    try {
+      const token = await getAccessTokenSilently()
+      console.log(token)
+    } catch(error) {
+      console.log(error)
+      alert('Login required')
+    }
+  }
 
   return (
     <>
@@ -49,6 +28,11 @@ export const LandingPage = () => {
       <br/>
       <button onClick={() => loginWithRedirect()}>
         Login via Redirect
+      </button>
+      <br/>
+      <br/>
+      <button onClick={() => silentAuthentication()}>
+        Silent Authentication
       </button>
     </>
   );
