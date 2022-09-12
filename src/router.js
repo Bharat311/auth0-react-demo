@@ -14,9 +14,9 @@ export const RouterProvider = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage/>} />
-        <Route element={<AuthLayout/>}>
+        {/* <Route element={<AuthLayout/>}> */}
           <Route path="/dashboard" element={<DashboardPage/>} />
-        </Route>
+        {/* </Route> */}
       </Routes>
     </BrowserRouter>
   );
