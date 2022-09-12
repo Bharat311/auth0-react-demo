@@ -9,7 +9,7 @@ export const LandingPage = () => {
   const silentAuthentication = async () => {
     try {
       const token = await getAccessTokenSilently()
-      console.log(token)
+      alert(token)
     } catch(error) {
       console.log(error)
       alert('Login required')
@@ -31,7 +31,7 @@ export const LandingPage = () => {
       </button>
       <br/>
       <br/>
-      <button onClick={() => silentAuthentication()}>
+      <button onClick={async () => silentAuthentication()}>
         Silent Authentication
       </button>
     </>
