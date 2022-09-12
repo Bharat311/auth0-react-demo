@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
-  const { loginWithPopup, loginWithRedirect, getAccessTokenSilently } = useAuth0();
+  const { isLoading, isAuthenticated, loginWithPopup, loginWithRedirect, getAccessTokenSilently, user, logout } = useAuth0();
 
   const silentAuthentication = async () => {
     try {
@@ -16,24 +16,46 @@ export const LandingPage = () => {
     }
   }
 
-  return (
+  const renderAuthenticated = () => (
+    <>
+      <p>Welcome {user.name}!</p>
+
+      <button onClick={() => logout({ returnTo: window.location.origin })}>
+        Logout
+      </button>
+    </>
+  )
+
+  const renderUnauthenticated = () => (
     <>
       <button onClick={async () => {
-        await loginWithPopup();
-        navigate("/dashboard")
-      }}>
-        Login via Popup
+          await loginWithPopup();
+          navigate("/")
+        }}>
+          Login via Popup
       </button>
       <br/>
       <br/>
       <button onClick={() => loginWithRedirect()}>
         Login via Redirect
       </button>
-      <br/>
-      <br/>
-      <button onClick={async () => silentAuthentication()}>
-        Silent Authentication
-      </button>
     </>
-  );
+  )
+
+  if (isLoading) {
+    return <p>Loading session...</p>
+  }
+
+  return (
+    <>
+      { (isAuthenticated) ? renderAuthenticated() : renderUnauthenticated() }
+      <>
+        <br/>
+        <br/>
+        <button onClick={async () => silentAuthentication()}>
+          Silent Authentication
+        </button>
+      </>
+    </>
+  )
 };
