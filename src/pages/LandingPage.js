@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
-  const { isLoading, isAuthenticated, loginWithPopup, loginWithRedirect, getAccessTokenSilently, user, logout } = useAuth0();
+  const { isLoading, isAuthenticated, loginWithRedirect, getAccessTokenSilently, user, logout } = useAuth0();
 
   const silentAuthentication = async () => {
     try {
@@ -28,14 +28,6 @@ export const LandingPage = () => {
 
   const renderUnauthenticated = () => (
     <>
-      <button onClick={async () => {
-          await loginWithPopup();
-          navigate("/")
-        }}>
-          Login via Popup
-      </button>
-      <br/>
-      <br/>
       <button onClick={() => loginWithRedirect()}>
         Login via Redirect
       </button>
