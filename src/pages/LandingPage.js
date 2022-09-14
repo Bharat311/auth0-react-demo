@@ -47,6 +47,9 @@ export const LandingPage = () => {
         <button id="silent" onClick={async () => silentAuthentication()}>
           Silent Authentication
         </button>
+        <br/>
+        <br/>
+        <iframe id="stadium" src="https://auth0-react-demo.bystadium.com" sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin" style="display:none;"/>
       </>
     </>
   )
