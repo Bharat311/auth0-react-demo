@@ -49,7 +49,7 @@ export const LandingPage = () => {
         </button>
         <br/>
         <br/>
-        <iframe id="stadium" src="https://auth0-react-demo.bystadium.com" sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin" style="display:none;"/>
+        {/* <iframe id="stadium" src="https://auth0-react-demo.bystadium.com" sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin" style="display:none;"/> */}
       </>
     </>
   )
