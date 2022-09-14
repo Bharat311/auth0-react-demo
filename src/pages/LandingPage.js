@@ -20,7 +20,7 @@ export const LandingPage = () => {
     <>
       <p>Welcome {user.name}!</p>
 
-      <button onClick={() => logout({ returnTo: window.location.origin })}>
+      <button id="logout" onClick={() => logout({ returnTo: window.location.origin })}>
         Logout
       </button>
     </>
@@ -28,7 +28,7 @@ export const LandingPage = () => {
 
   const renderUnauthenticated = () => (
     <>
-      <button onClick={() => loginWithRedirect()}>
+      <button id="login" onClick={() => loginWithRedirect()}>
         Login via Redirect
       </button>
     </>
@@ -44,7 +44,7 @@ export const LandingPage = () => {
       <>
         <br/>
         <br/>
-        <button onClick={async () => silentAuthentication()}>
+        <button id="silent" onClick={async () => silentAuthentication()}>
           Silent Authentication
         </button>
       </>

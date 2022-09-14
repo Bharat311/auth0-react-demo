@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SSO</title>
+  </head>
+  <body>
+    <h1>Welcome to Stadium!</h1>
+    <h2>Session: <span id="sessionData"></span></h2>
+    <script type="text/javascript">
+      function refreshData(event) {
+        var data = {
+          session: localStorage.getItem('session')
+        }
+        event.source.postMessage(data, event.origin)
+      }
+
+      function refreshSession() {
+        var span = document.getElementById("sessionData");
+        var value = localStorage.getItem("session");
+        span.innerHTML = value || "false";
+      }
+
+      window.addEventListener("load", function() {
+        console.log('- Snacks loaded -');
+        refreshData()
+      })
+
+      window.addEventListener("message", function(event) {
+        console.log('- Stadium received message -')
+        console.log('Event: ', event)
+        console.log('Action: ', event.data)
+
+        switch (event.data) {
+          case 'ready':
+            break;
+          case 'login':
+            localStorage.setItem('session', true);
+            break;
+          case 'logout':
+            localStorage.removeItem('session');
+            break;
+          default:
+        }
+
+        refreshData(event);
+      });
+
+      window.addEventListener("storage", function(event) {
+        console.log('- Local storage changed -')
+        console.log('Event: ', event)
+        refreshSession()
+      })
+    </script>
+  </body>
+</html>
